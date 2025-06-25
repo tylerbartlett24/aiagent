@@ -30,7 +30,7 @@ class Calculator:
                 while (
                     operators
                     and operators[-1] in self.operators
-                    and self.precedence[operators[-1]] >= self.precedence[token]
+                    and self.precedence[operators[-1]] > self.precedence[token]
                 ):
                     self._apply_operator(operators, values)
                 operators.append(token)
@@ -59,3 +59,11 @@ class Calculator:
         b = values.pop()
         a = values.pop()
         values.append(self.operators[operator](a, b))
+
+
+if __name__ == '__main__':
+    from render import render
+    calculator = Calculator()
+    expression = "2 + 2"
+    result = calculator.evaluate(expression)
+    print(render(expression, result))
